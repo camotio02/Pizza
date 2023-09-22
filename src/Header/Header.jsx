@@ -5,6 +5,9 @@ import WifiCalling3Icon from '@mui/icons-material/WifiCalling3'
 import MenuIcon from '@mui/icons-material/Menu'
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu'
 import LocalMallIcon from '@mui/icons-material/LocalMall';
+import { IconButton } from '@mui/material';
+import PhoneIcon from '@mui/icons-material/Phone';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { Link } from 'react-router-dom'
 
 export const Header = () => {
@@ -30,6 +33,22 @@ export const Header = () => {
   }
 
 
+
+
+
+
+    const [isWhatsApp, setIsWhatsApp] = useState(true);
+  
+    useEffect(() => {
+      const intervalId = setInterval(() => {
+        setIsWhatsApp(prevIsWhatsApp => !prevIsWhatsApp);
+      }, 2000);
+  
+      return () => clearInterval(intervalId);
+    }, []);
+  
+
+
   return (
     <header className="Container_Header">
       <Box className="div-box-text">
@@ -50,14 +69,18 @@ export const Header = () => {
               },
         
       }}  className="div-box-button">
-        <WifiCalling3Icon
-          sx={{
+
+        {isWhatsApp ? <WhatsAppIcon    sx={{
             color: '#FF6510',
             width: '2rem',
             height: '3.8rem',
             width: '3.8rem',
-          }}
-        />
+          }} /> : <WifiCalling3Icon    sx={{
+            color: '#FF6510',
+            width: '2rem',
+            height: '3.8rem',
+            width: '3.8rem',
+          }}/>}
         <Box>
           <p>24/7 serviço de entrega de pizza</p>
           <h3>+55 41 99760-748</h3>
@@ -142,4 +165,3 @@ export const Header = () => {
 }
 
 
-// jjkjkwlk

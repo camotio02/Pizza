@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './home.css'
 import { TextField, Typography, Stack, Box } from '@mui/material'
 import Pizza from '../componets/pizza'
@@ -7,8 +7,22 @@ import { Header } from '../Header/header'
 import { CarMobileIcon } from '../componets/CarMobileIcon'
 import { MyFooter } from '../componets/Footer'
 import { Cta } from '../componets/Cta'
-
+import { useEffect } from 'react'
+import { api_users } from '../api/back'
 export const MyHome = () => {
+  const [messages, setMessages] = useState([])
+  useEffect(() => {
+    const getMessages = async () => {
+      try {
+        const response = await api_users.user.get()
+        setMessages(response)
+      } catch (err) {
+        console.err(err)
+      }
+    }
+    getMessages()
+    console.log(messages)
+  }, [])
   return (
     <>
       <Stack
@@ -32,10 +46,8 @@ export const MyHome = () => {
         }}
       >
         <Header />
-
         <Banner />
         <Pizza />
-
         <MyFooter />
       </Stack>
     </>

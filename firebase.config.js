@@ -1,21 +1,18 @@
-// Import the functions you need from the SDKs you need
+
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import { getFirestore } from "firebase/firestore";
 const firebaseConfig = {
-    apiKey: "AIzaSyAtyE1AhGStASntH1xJ0ansMFAz9KU5vlc",
-    authDomain: "nova-pizzaria-445f3.firebaseapp.com",
-    projectId: "nova-pizzaria-445f3",
-    storageBucket: "nova-pizzaria-445f3.appspot.com",
-    messagingSenderId: "752552112786",
-    appId: "1:752552112786:web:c03bebe820fc5893152c4b",
-    measurementId: "G-447GG9VZ33"
+  apiKey: "AIzaSyAz3WhuZB22TPRjP5hUp2YonLPpS4oipzU",
+  authDomain: "pizzaria-7b611.firebaseapp.com",
+  databaseURL: "https://pizzaria-7b611-default-rtdb.firebaseio.com",
+  projectId: "pizzaria-7b611",
+  storageBucket: "pizzaria-7b611.appspot.com",
+  messagingSenderId: "691116080485",
+  appId: "1:691116080485:web:04986bfa28fde3cae7758c",
+  measurementId: "G-1GNS4QK9Y5"
 };
-
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app)
 const analytics = getAnalytics(app);
+export {db}

@@ -1,8 +1,15 @@
 {
+
+
+
+
+  
   "name": "car",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+
+  
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -18,7 +25,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.16.0",
-    "router-dom": "^2.2.11"
+    "router-dom": "^2.2.11",
+    "socket.io-client": "^4.7.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
@@ -30,4 +38,9 @@
     "eslint-plugin-react-refresh": "^0.4.3",
     "vite": "^4.4.5"
   }
+
+  
+
 }
+
+

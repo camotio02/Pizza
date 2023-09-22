@@ -7,6 +7,10 @@ import InstagramIcon from '@mui/icons-material/Instagram'
 import YouTubeIcon from '@mui/icons-material/YouTube'
 
 export const MyFooter = () => {
+
+ 
+  
+
   return (
     <>
       <Stack
@@ -55,14 +59,7 @@ export const MyFooter = () => {
         </Box>
        
           <Box className="div-box-icon">
-            <WifiCalling3Icon
-              sx={{
-                color: '#FF6510',
-                width: '2rem',
-                height: '3.8rem',
-                width: '3.8rem',
-              }}
-            />
+      
             <Box>
               <p>24/7 serviço de entrega de pizza</p>
               <h3>+55 41 99760-748</h3>
