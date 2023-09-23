@@ -1,6 +1,6 @@
 import { Box, Stack } from "@mui/system";
 
-import { Header } from "../Header/header";
+import { Header } from "../Header/Header";
 
 export const MainLayout = ({ children }) => {
     return (

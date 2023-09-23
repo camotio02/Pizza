@@ -143,14 +143,35 @@ export const Header = () => {
     
             <Box className="menu-celular">
               <Box className="div-box-icon">
-                <WifiCalling3Icon
-                  sx={{
-                    color: '#FF6510',
-                    width: '2rem',
-                    height: '3.8rem',
-                    width: '3.8rem',
-                  }}
-                />
+              {isWhatsApp ? <WhatsAppIcon    sx={{
+              color: '#FF6510',
+              bgcolor: '#fff',
+              width: '2rem',
+              borderRadius: '50%',
+              height: '3.8rem',
+              width: '3.8rem',
+              padding: '2px',
+  
+              '&:hover': {
+                color: '#fff',
+                bgcolor: '#FF6510',
+                transition: 'all 0.42s ease',
+              }
+          }} /> : <WifiCalling3Icon    sx={{
+            color: '#FF6510',
+            bgcolor: '#fff',
+            width: '2rem',
+            borderRadius: '50%',
+            height: '3.8rem',
+            width: '3.8rem',
+            padding: '2px',
+
+            '&:hover': {
+              color: '#fff',
+              bgcolor: '#FF6510',
+              transition: 'all 0.42s ease',
+            }
+          }}/>}
                 <Box>
                   <p>24/7 serviço de entrega de pizza</p>
                   <h3>+55 41 99760-748</h3>
