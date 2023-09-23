@@ -3,6 +3,7 @@ import { TextField, Typography, Stack, Box, Button, Input } from '@mui/material'
 import { SizeSelection } from './SizeSelection'
 import { Crustelection } from './Crustelection'
 import { Topping } from './Topping'
+import MandatoryItems from './mandatoryItems'
 const sizes = [
   {
     size: 'Pequena',
@@ -78,19 +79,17 @@ export const CreatPizza = ({ data }) => {
             height={250}
             src={data?.Image}
             alt="Pizza"
-            sx={{
-              '@media screen and (max-width: 805px)': {
-                width: '50px',
-                height: 'auto',
-              },
-            }}
+
+
           />
         </Box>
+
+
 
         <Box>
           <Stack
             sx={{
-              
+
               position: 'relative',
               height: '33rem',
               gap: '2rem',
@@ -105,7 +104,7 @@ export const CreatPizza = ({ data }) => {
             }}
           >
             <Stack
-              sx={{ 
+              sx={{
                 height: '30rem',
                 padding: '1rem',
                 gap: '2rem',
@@ -143,7 +142,7 @@ export const CreatPizza = ({ data }) => {
                       display: 'flex',
                       // bgcolor: 'red',
                       width: '100%',
-                      
+
                       alignItems: 'center',
                       justifyContent: 'space-around',
                       flexDirection: 'row',
@@ -175,7 +174,7 @@ export const CreatPizza = ({ data }) => {
                       )
                     })}
                   </Typography>
-                </Typography>              
+                </Typography>
 
                 <Typography
                   sx={{
@@ -187,6 +186,29 @@ export const CreatPizza = ({ data }) => {
                 >
                   <Topping />
                 </Typography>
+
+                <Typography
+                  sx={{
+                    display: 'flex',
+                    position: 'relative',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '100%',
+                    flexDirection: 'column'
+                  }}
+                >
+                  <Box sx={{
+                    color: 'red',
+                    marginBottom: '2rem',
+                    marginTop: '2rem',
+                    width:'100%',
+                    
+                  }}>
+                    <h2>Itens Obrigatórios</h2>
+                  </Box>
+                  <MandatoryItems/>
+                </Typography>
+
               </Box>
               <Typography
                 sx={{

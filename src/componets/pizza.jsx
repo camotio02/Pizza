@@ -151,7 +151,7 @@ const style = {
   left: '50%',
   width: '60rem',
   height: '40rem',
-  transform: 'translate(-50%, -50%)',
+  transform: 'translate(-50%, -60%)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'ceneter',
@@ -162,14 +162,17 @@ const style = {
   p: 4,
   borderRadius: '2.8rem',
 
+
+
   '@media only screen and (max-width: 805px)': {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    width: '100%',
-    height: '100%',
+    width: '99%',
+    height: '99%',
     outline: 'none',
+   
   },
 }
 
@@ -318,7 +321,7 @@ const Pizza = ({ pizza }) => {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box sx={style}>
+            <Box sx={style}> 
               <Box
                 sx={{
                   position: 'absolute',
@@ -331,6 +334,7 @@ const Pizza = ({ pizza }) => {
                   alignItems: 'center',
                   alignContent: 'center',
                   textAlign: 'center',
+                 
                 }}
               >
                 <CloseIcon

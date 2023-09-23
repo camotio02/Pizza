@@ -9,7 +9,7 @@ import { MyFooter } from '../componets/Footer'
 import { Cta } from '../componets/Cta'
 import { useEffect } from 'react'
 import { api_users } from '../api/back'
-import MandatoryItems from '../componets/mandatoryItems'
+
 export const MyHome = () => {
   const [messages, setMessages] = useState([])
   useEffect(() => {
@@ -49,7 +49,7 @@ export const MyHome = () => {
         <Header />
         <Banner />
         <Pizza />
-        <MandatoryItems/>
+
         <MyFooter />
       </Stack>
     </>

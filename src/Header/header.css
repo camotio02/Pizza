@@ -14,6 +14,11 @@ html {
   font-size: 62.5%;
 }
 
+
+
+
+
+
 .Container_Header {
   position: fixed;
   top: 0;
@@ -67,7 +72,23 @@ span {
   align-items: center;
   gap: 2rem;
   flex-direction: row;
+
+
 }
+
+@media screen and (max-width: 805px) {
+  #minha-imagem {
+    /* padding: 5rem; */
+    width: 190px !important; 
+    height: 190px !important;
+    /* background: green; */
+  
+  
+  }
+  
+}
+
+
 @media screen and (max-width: 700px) {
   .div-box-button {
     display: none;
@@ -139,3 +160,5 @@ span {
   right: 50px;
   }
 }
+
+
