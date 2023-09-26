@@ -112,13 +112,16 @@ export const CreatPizza = ({ data }) => {
                 overflowY: 'scroll',
 
                 '@media only screen and (max-width: 805px)': {
-                  height: 'auto',
+                  height: '40rem',
+                  gap: '2rem',
                   width: '100%',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
+                  flexDirection: 'column',
                   textAlign: 'center',
+                  // background: 'green',
                 },
+
               }}
             >
               <Box
@@ -135,6 +138,7 @@ export const CreatPizza = ({ data }) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     width: '100%',
+                    
                   }}
                 >
                   <Typography

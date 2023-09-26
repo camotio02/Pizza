@@ -19,7 +19,6 @@ export const MyFooter = () => {
 
     return () => clearTimeout(tempoTemorato);
   }, [trocarIcon]);
-  // asfasfa
 
   return (
     <>
@@ -105,9 +104,6 @@ export const MyFooter = () => {
           </Box>
 
         </Box>
-
-
-
       </Stack>
     </>
   )
