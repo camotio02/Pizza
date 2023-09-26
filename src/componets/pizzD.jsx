@@ -239,8 +239,22 @@ export const CreatPizza = ({ data }) => {
               fontWeight: '600',
               color: 'rgb(3,37,77)',
               position: 'absolute',
-              bottom: '0',
+              bottom: '0px',
+
+              '@media only screen and (max-width: 805px)': {
+                gap: '2rem',
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                flexDirection: 'column',
+                textAlign: 'center',
+                // background: 'green',
+                bottom: '45px',
+              },
+     
             }}
+
+
           >
             <Button
               sx={{
