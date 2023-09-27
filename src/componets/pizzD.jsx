@@ -1,9 +1,12 @@
 import React, { useState, useEffect, Fragment } from 'react'
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 import { TextField, Typography, Stack, Box, Button, Input } from '@mui/material'
 import { SizeSelection } from './SizeSelection'
 import { Crustelection } from './Crustelection'
-import { Topping } from './Topping'
 import MandatoryItems from './mandatoryItems'
+import { Topping } from '../mask'
+import NestedModal from './DateSlection'
 const sizes = [
   {
     size: 'Pequena',
@@ -22,16 +25,29 @@ const sizes = [
   },
 ]
 export const CreatPizza = ({ data }) => {
-  const [size, setSize] = useState('Pequeno')
-  const [crust, setCrust] = useState('traditional')
-  const [additionalTopping, setAdditionalTopping] = useState([])
-  const [additionalToppingPrice, setAdditionalToppingPrice] = useState(0)
-
-  const [price, setPrice] = useState(0)
-
+  const [soma, setSoma] = useState(0)
   const [myNewCards, setMyNewCards] = useState(null)
-  const [abreMenuPizza, setAbreMenuPizza] = useState(true)
   const [selectedSize, setSelectedSize] = useState('')
+  const [abreMenuPizza, setAbreMenuPizza] = useState(false)
+
+  const toggleMenu = () => {
+    setAbreMenuPizza(!abreMenuPizza)
+  }
+
+  const [openNewModa, setOpenNewModa] = useState(false)
+
+  const toggleNewModal = () => {
+    setOpenNewModa(!openNewModa);
+  }
+
+  const [pedido, setPedido] = useState({
+    ingredientes: [],
+    bebidas: [],
+  })
+
+  useEffect(() => {
+    console.log(pedido)
+  }, [pedido])
 
   const handleSizeSelection = (size) => {
     setSelectedSize(size)
@@ -79,17 +95,12 @@ export const CreatPizza = ({ data }) => {
             height={250}
             src={data?.Image}
             alt="Pizza"
-
-
           />
         </Box>
-
-
 
         <Box>
           <Stack
             sx={{
-
               position: 'relative',
               height: '33rem',
               gap: '2rem',
@@ -121,7 +132,6 @@ export const CreatPizza = ({ data }) => {
                   textAlign: 'center',
                   // background: 'green',
                 },
-
               }}
             >
               <Box
@@ -138,7 +148,6 @@ export const CreatPizza = ({ data }) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     width: '100%',
-                    
                   }}
                 >
                   <Typography
@@ -165,7 +174,9 @@ export const CreatPizza = ({ data }) => {
                             alt={data.description}
                           />
                           <Stack>
-                            <Box sx={{ color: 'black', gap: '2rem' }}>{size.size}</Box>
+                            <Box sx={{ color: 'black', gap: '2rem' }}>
+                              {size.size}
+                            </Box>
                             <input
                               type="radio"
                               name={selectedSize}
@@ -188,8 +199,14 @@ export const CreatPizza = ({ data }) => {
                     width: '100%',
                   }}
                 >
-                  <Topping />
+                  <Topping
+                    soma={soma}
+                    setSoma={setSoma}
+                    setPedido={setPedido}
+                  />
                 </Typography>
+
+                <NestedModal/>
 
                 <Typography
                   sx={{
@@ -198,21 +215,74 @@ export const CreatPizza = ({ data }) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     width: '100%',
-                    flexDirection: 'column'
+                    flexDirection: 'column',
                   }}
                 >
-                  <Box sx={{
-                    color: 'red',
-                    marginBottom: '2rem',
-                    marginTop: '2rem',
-                    width:'100%',
-                    
-                  }}>
-                    <h2>Itens Obrigatórios</h2>
-                  </Box>
-                  <MandatoryItems/>
-                </Typography>
 
+                <Box
+                sx={{
+                  color: 'red',
+                  marginBottom: '1rem',
+                  marginTop: '1rem',
+                  width: '100%',
+                }}
+                >
+
+                </Box>
+                  <Stack>
+                    <Button
+                      sx={{
+                        borderRadius: '4px',
+                        bgcolor: '#f6410a',
+                        fontSize: '12px',
+                        fontWeight: '500',
+                        padding: '1rem 2rem',
+                        Color: '#fff',
+                        border: 'none',
+                        outline: 'none',
+                        fontFamily: 'Roboto sans-serif',
+                        fontFamily: 'Shrikhand cursive',
+                        fontWeight: '900',
+                        gap: '2rem',
+                        backgroundColor: '#FF6510 !important',
+                      }}
+                      onClick={toggleMenu}
+                    >
+                      {abreMenuPizza ? (
+                        <ArrowUpwardIcon sx={{
+                          color: '#fff',
+                          fontWeight: '900',
+                          fontSize: '2rem'
+                        }}/>
+                      ) : (
+                        <ArrowDownwardIcon sx={{
+                          color: '#fff',
+                          fontWeight: '900',
+                          fontSize: '2rem'
+                        }} />
+                      )}
+                    Itens de Bebidas
+                    </Button>
+                    <Box
+                    sx={{
+                      color: 'red',
+                      marginBottom: '2rem',
+                      marginTop: '2rem',
+                      width: '100%',
+                    }}
+                    >
+                    {abreMenuPizza && (
+                      <MandatoryItems
+                        setPedido={setPedido}
+                        pedido={pedido}
+                        soma={soma}
+                        setSoma={setSoma}
+                      />
+                    )}
+                    </Box>
+                   
+                  </Stack>
+                </Typography>
               </Box>
               <Typography
                 sx={{
@@ -251,59 +321,59 @@ export const CreatPizza = ({ data }) => {
                 // background: 'green',
                 bottom: '45px',
               },
-     
             }}
-
-
           >
-            <Button
-              sx={{
-                borderRadius: '4px',
-                bgcolor: '#f6410a',
-                fontSize: '12px',
-                fontWeight: '500',
-                padding: '1rem 2rem',
-                Color: '#fff',
-                border: 'none',
-                outline: 'none',
-                fontFamily: 'Roboto sans-serif',
-                fontFamily: 'Shrikhand cursive',
-                fontWeight: '900',
-                gap: '2rem',
-                backgroundColor: '#FF6510 !important',
+            {soma ? (
+              <Button
+                sx={{
+                  borderRadius: '4px',
+                  bgcolor: '#f6410a',
+                  fontSize: '12px',
+                  fontWeight: '500',
+                  padding: '1rem 2rem',
+                  Color: '#fff',
+                  border: 'none',
+                  outline: 'none',
+                  fontFamily: 'Roboto sans-serif',
+                  fontFamily: 'Shrikhand cursive',
+                  fontWeight: '900',
+                  gap: '2rem',
+                  backgroundColor: '#FF6510 !important',
 
-                '&:hover': {
-                  background: 'transparent',
-                  transition: '0.6s',
-                },
-              }}
-            >
-              Adicionar na sacola
-              <Box sx={{ height: 'auto' }}>
-                {sizes.map((item, index) => {
-                  const calculatePrice = () => {
-                    const percentage = item.percentage / 100
-                    const price = data.pizzaPrice
+                  '&:hover': {
+                    background: 'transparent',
+                    transition: '0.6s',
+                  },
+                }}
+               
+              >
+              
+                Adicionar na sacola
+                <Box  onClick={toggleNewModal} sx={{ height: 'auto' }}>
+                  {sizes.map((item, index) => {
+                    const calculatePrice = () => {
+                      const percentage = item.percentage / 100
+                      const price = data.pizzaPrice
 
-                    if (selectedSize === 'small') {
-                      return price - price * percentage
-                    } else {
-                      return price + price * percentage
+                      if (selectedSize === 'small') {
+                        return price - price * percentage
+                      } else {
+                        return price + price * percentage
+                      }
                     }
-                  }
-
-                  return (
-                    <Fragment key={index}>
-                      {item.size === selectedSize && (
-                        <Fragment>
-                          {`R$ ${calculatePrice().toFixed(2)}`}
-                        </Fragment>
-                      )}
-                    </Fragment>
-                  )
-                })}
-              </Box>
-            </Button>
+                    return (
+                      <Fragment key={index}>
+                        {item.size === selectedSize && (
+                          <Fragment>
+                            {`R$ ${(calculatePrice() + soma).toFixed(2)}`}
+                          </Fragment>
+                        )}
+                      </Fragment>
+                    )
+                  })}
+                </Box>
+              </Button>
+            ) : null}
           </Stack>
         </Box>
       </Stack>
@@ -311,4 +381,4 @@ export const CreatPizza = ({ data }) => {
   )
 }
 
-export default CreatPizza;
+export default CreatPizza
