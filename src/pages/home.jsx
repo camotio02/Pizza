@@ -9,6 +9,8 @@ import { MyFooter } from '../componets/Footer'
 import { Cta } from '../componets/Cta'
 import { useEffect } from 'react'
 import { api_users } from '../api/back'
+import { PaymentIcon } from '../paidIngredients/PaymentIcon'
+import { PaidIngredients } from '../paidIngredients'
 
 export const MyHome = () => {
   const [messages, setMessages] = useState([])
@@ -49,7 +51,8 @@ export const MyHome = () => {
         <Header />
         <Banner />
         <Pizza />
-
+      
+        <PaidIngredients/>
         <MyFooter />
       </Stack>
     </>

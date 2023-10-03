@@ -2,11 +2,10 @@ import React, { useState, useEffect, Fragment } from 'react'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 import { TextField, Typography, Stack, Box, Button, Input } from '@mui/material'
-import { SizeSelection } from './SizeSelection'
-import { Crustelection } from './Crustelection'
 import MandatoryItems from './mandatoryItems'
 import { Topping } from '../mask'
 import NestedModal from './DateSlection'
+import Pizza from './pizza'
 const sizes = [
   {
     size: 'Pequena',
@@ -29,6 +28,28 @@ export const CreatPizza = ({ data }) => {
   const [myNewCards, setMyNewCards] = useState(null)
   const [selectedSize, setSelectedSize] = useState('')
   const [abreMenuPizza, setAbreMenuPizza] = useState(false)
+
+
+  const [abreSacola, setAbreSacola] = useState(false);
+  const [valorDosItens, setValorDosItens] = useState(null);
+  const OpenBag = () => setAbreSacola(true);
+  const CloseBag = () => setAbreSacola(false);
+
+  const openModal = (img) => {
+    setAbreSacola(!abreSacola);
+    const valor = {
+      Image: img.Image,
+      userName: img.userName,
+      description: img.description,
+      pizzaPrice: img.pizzaPrice,
+    }
+    setValorDosItens(valor)
+  }
+
+
+
+
+
 
   const toggleMenu = () => {
     setAbreMenuPizza(!abreMenuPizza)
@@ -53,16 +74,13 @@ export const CreatPizza = ({ data }) => {
     setSelectedSize(size)
   }
 
-  const openModal = (newCard) => {
-    setMyNewCards(!img)
-    const myNewCard = {
-      Image: img.Image,
-      userName: img.userName,
-      description: img.description,
-      pizzaPrice: img.pizzaPrice,
-    }
-    setMyNewCards(img)
-  }
+  
+  // const [addSacolo, setAddSacolo ] = useState(false);
+
+  // const fazerPedido = () => {
+  //   setAddSacolo(!addSacolo);
+  // }
+
 
   return (
     <>
@@ -324,6 +342,7 @@ export const CreatPizza = ({ data }) => {
             }}
           >
             {soma ? (
+        
               <Button
                 sx={{
                   borderRadius: '4px',
@@ -331,7 +350,7 @@ export const CreatPizza = ({ data }) => {
                   fontSize: '12px',
                   fontWeight: '500',
                   padding: '1rem 2rem',
-                  Color: '#fff',
+                  Color: 'black',
                   border: 'none',
                   outline: 'none',
                   fontFamily: 'Roboto sans-serif',
@@ -345,10 +364,17 @@ export const CreatPizza = ({ data }) => {
                     transition: '0.6s',
                   },
                 }}
-               
+            
               >
-              
+              {openNewModa && (
+
+               
+
+                <NestedModal />
+              )}
+            
                 Adicionar na sacola
+
                 <Box  onClick={toggleNewModal} sx={{ height: 'auto' }}>
                   {sizes.map((item, index) => {
                     const calculatePrice = () => {
@@ -356,16 +382,17 @@ export const CreatPizza = ({ data }) => {
                       const price = data.pizzaPrice
 
                       if (selectedSize === 'small') {
-                        return price - price * percentage
+                        return  ( (price - price * percentage) + soma ).toFixed(2);
                       } else {
-                        return price + price * percentage
+                        return ( (price + price * percentage) + soma ).toFixed(2);
+              
                       }
                     }
                     return (
                       <Fragment key={index}>
                         {item.size === selectedSize && (
                           <Fragment>
-                            {`R$ ${(calculatePrice() + soma).toFixed(2)}`}
+                            {`R$ ${calculatePrice()}`}
                           </Fragment>
                         )}
                       </Fragment>
@@ -373,7 +400,10 @@ export const CreatPizza = ({ data }) => {
                   })}
                 </Box>
               </Button>
+              
             ) : null}
+                
+
           </Stack>
         </Box>
       </Stack>

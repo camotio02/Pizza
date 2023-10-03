@@ -12,7 +12,7 @@ export const Topping = ({ soma, setSoma, setPedido }) => {
     setSoma(total)
   }
 
-  const getIngrediente = ({ arrayIndex }) => {
+  const getIngrediente = (arrayIndex ) => {
     const ingredientes = []
     for (let i = 0; i < arrayIndex.length; i++) {
       const ingrediente = {

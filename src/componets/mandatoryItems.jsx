@@ -117,7 +117,7 @@ const Drinks = [
 ]
 
 const MandatoryItems = ({ soma, setSoma, setPedido }) => {
-  // pppppppppppppppp
+
 
   const [selectedItems, setSelectedItems] = useState([])
   const calculateTotal = () => {
@@ -128,7 +128,7 @@ const MandatoryItems = ({ soma, setSoma, setPedido }) => {
     setSoma(total)
   }
 
-  const getMydrink = ({ arrayMyIndex }) => {
+  const getMydrink = ( arrayMyIndex ) => {
     const bebidas = []
     for (let i = 0; i < arrayMyIndex.length; i++) {
       const myDrink = {
@@ -139,6 +139,7 @@ const MandatoryItems = ({ soma, setSoma, setPedido }) => {
     }
     return bebidas
   }
+
   const handleItemToggle = (index) => {
     const itemIndex = selectedItems.indexOf(index)
     if (itemIndex === -1) {
