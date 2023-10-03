@@ -2,6 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
+import { Stack } from '@mui/material';
 
 const style = {
   position: 'absolute',
@@ -57,14 +58,27 @@ export default function NestedModal() {
   };
 
   return (
-    <div>
+    <Stack
+    sx={{
+      display: 'grid',
+      height: 'auto',
+      gridTemplateColumns: '1fr 2fr',
+      gap: '1rem',
+      position: 'relative',
+      '@media only screen and (max-width: 805px)': {
+        gridTemplateColumns: ' 1fr',
+      },
+    }}>
       <Button onClick={handleOpen}>Open modal</Button>
+
+
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
+
         <Box sx={{ ...style, width: 400 }}>
           <h2 id="parent-modal-title">Text in a modal</h2>
           <p id="parent-modal-description">
@@ -73,6 +87,6 @@ export default function NestedModal() {
           <ChildModal />
         </Box>
       </Modal>
-    </div>
+    </Stack>
   );
 }
