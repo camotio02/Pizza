@@ -25,32 +25,12 @@ const sizes = [
 ]
 export const CreatPizza = ({ data }) => {
   const [soma, setSoma] = useState(0)
-  const [myNewCards, setMyNewCards] = useState(null)
   const [selectedSize, setSelectedSize] = useState('')
   const [abreMenuPizza, setAbreMenuPizza] = useState(false)
-
-
   const [abreSacola, setAbreSacola] = useState(false);
   const [valorDosItens, setValorDosItens] = useState(null);
   const OpenBag = () => setAbreSacola(true);
   const CloseBag = () => setAbreSacola(false);
-
-  const openModal = (img) => {
-    setAbreSacola(!abreSacola);
-    const valor = {
-      Image: img.Image,
-      userName: img.userName,
-      description: img.description,
-      pizzaPrice: img.pizzaPrice,
-    }
-    setValorDosItens(valor)
-  }
-
-
-
-
-
-
   const toggleMenu = () => {
     setAbreMenuPizza(!abreMenuPizza)
   }
@@ -62,10 +42,10 @@ export const CreatPizza = ({ data }) => {
   }
 
   const [pedido, setPedido] = useState({
+    infoPizza: data || [],
     ingredientes: [],
     bebidas: [],
   })
-
   useEffect(() => {
     console.log(pedido)
   }, [pedido])
@@ -73,15 +53,6 @@ export const CreatPizza = ({ data }) => {
   const handleSizeSelection = (size) => {
     setSelectedSize(size)
   }
-
-  
-  // const [addSacolo, setAddSacolo ] = useState(false);
-
-  // const fazerPedido = () => {
-  //   setAddSacolo(!addSacolo);
-  // }
-
-
   return (
     <>
       <Stack
@@ -111,7 +82,7 @@ export const CreatPizza = ({ data }) => {
             id="minha-imagem"
             width={250}
             height={250}
-            src={data?.Image}
+            src={data?.image}
             alt="Pizza"
           />
         </Box>
@@ -159,7 +130,7 @@ export const CreatPizza = ({ data }) => {
                   color: 'red',
                 }}
               >
-                {data?.userName}
+                {data?.name}
                 <Typography
                   sx={{
                     display: 'flex',
@@ -188,7 +159,7 @@ export const CreatPizza = ({ data }) => {
                               width: size.tamanho,
                               height: size.tamanho,
                             }}
-                            src={data.Image}
+                            src={data.image}
                             alt={data.description}
                           />
                           <Stack>
@@ -224,7 +195,7 @@ export const CreatPizza = ({ data }) => {
                   />
                 </Typography>
 
-                <NestedModal/>
+                <NestedModal />
 
                 <Typography
                   sx={{
@@ -237,16 +208,16 @@ export const CreatPizza = ({ data }) => {
                   }}
                 >
 
-                <Box
-                sx={{
-                  color: 'red',
-                  marginBottom: '1rem',
-                  marginTop: '1rem',
-                  width: '100%',
-                }}
-                >
+                  <Box
+                    sx={{
+                      color: 'red',
+                      marginBottom: '1rem',
+                      marginTop: '1rem',
+                      width: '100%',
+                    }}
+                  >
 
-                </Box>
+                  </Box>
                   <Stack>
                     <Button
                       sx={{
@@ -271,7 +242,7 @@ export const CreatPizza = ({ data }) => {
                           color: '#fff',
                           fontWeight: '900',
                           fontSize: '2rem'
-                        }}/>
+                        }} />
                       ) : (
                         <ArrowDownwardIcon sx={{
                           color: '#fff',
@@ -279,26 +250,26 @@ export const CreatPizza = ({ data }) => {
                           fontSize: '2rem'
                         }} />
                       )}
-                    Itens de Bebidas
+                      Itens de Bebidas
                     </Button>
                     <Box
-                    sx={{
-                      color: 'red',
-                      marginBottom: '2rem',
-                      marginTop: '2rem',
-                      width: '100%',
-                    }}
+                      sx={{
+                        color: 'red',
+                        marginBottom: '2rem',
+                        marginTop: '2rem',
+                        width: '100%',
+                      }}
                     >
-                    {abreMenuPizza && (
-                      <MandatoryItems
-                        setPedido={setPedido}
-                        pedido={pedido}
-                        soma={soma}
-                        setSoma={setSoma}
-                      />
-                    )}
+                      {abreMenuPizza && (
+                        <MandatoryItems
+                          setPedido={setPedido}
+                          pedido={pedido}
+                          soma={soma}
+                          setSoma={setSoma}
+                        />
+                      )}
                     </Box>
-                   
+
                   </Stack>
                 </Typography>
               </Box>
@@ -342,7 +313,7 @@ export const CreatPizza = ({ data }) => {
             }}
           >
             {soma ? (
-        
+
               <Button
                 sx={{
                   borderRadius: '4px',
@@ -364,28 +335,28 @@ export const CreatPizza = ({ data }) => {
                     transition: '0.6s',
                   },
                 }}
-            
+
               >
-              {openNewModa && (
+                {openNewModa && (
 
-               
 
-                <NestedModal />
-              )}
-            
+
+                  <NestedModal />
+                )}
+
                 Adicionar na sacola
 
-                <Box  onClick={toggleNewModal} sx={{ height: 'auto' }}>
+                <Box onClick={toggleNewModal} sx={{ height: 'auto' }}>
                   {sizes.map((item, index) => {
                     const calculatePrice = () => {
                       const percentage = item.percentage / 100
                       const price = data.pizzaPrice
 
                       if (selectedSize === 'small') {
-                        return  ( (price - price * percentage) + soma ).toFixed(2);
+                        return ((price - price * percentage) + soma).toFixed(2);
                       } else {
-                        return ( (price + price * percentage) + soma ).toFixed(2);
-              
+                        return ((price + price * percentage) + soma).toFixed(2);
+
                       }
                     }
                     return (
@@ -400,9 +371,9 @@ export const CreatPizza = ({ data }) => {
                   })}
                 </Box>
               </Button>
-              
+
             ) : null}
-                
+
 
           </Stack>
         </Box>

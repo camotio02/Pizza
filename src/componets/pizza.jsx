@@ -172,11 +172,11 @@ const style = {
     width: '99%',
     height: '99%',
     outline: 'none',
-   
+
   },
 }
 
-const Pizza = ({ pizza }) => {
+const Pizza = ({ pizzas = [] }) => {
   const [open, setOpen] = useState(false)
   const [datas, setDatas] = useState(null)
   const handleOpen = () => setOpen(true)
@@ -184,14 +184,13 @@ const Pizza = ({ pizza }) => {
   const openModal = (img) => {
     setOpen(!open)
     const data = {
-      Image: img.Image,
-      userName: img.userName,
+      image: img.image,
+      name: img.name,
       description: img.description,
-      pizzaPrice: img.pizzaPrice,
+      price: img.price,
     }
     setDatas(data)
   }
-
   return (
     <>
       <Typography
@@ -207,8 +206,8 @@ const Pizza = ({ pizza }) => {
           position: 'relative',
         }}
       >
-        {PizzaDeleils.length > 0 &&
-          PizzaDeleils.map((addNewPizza, index) => {
+        {pizzas?.length > 0 &&
+          pizzas?.map((addNewPizza, index) => {
             return (
               <Card
                 key={index}
@@ -235,7 +234,7 @@ const Pizza = ({ pizza }) => {
                     onClick={handleOpen}
                     width={260}
                     height={260}
-                    src={addNewPizza.Image}
+                    src={addNewPizza.image}
                     alt="Pizza"
                   ></img>
                 </Box>
@@ -247,7 +246,7 @@ const Pizza = ({ pizza }) => {
                     color: 'red',
                   }}
                 >
-                  {addNewPizza?.userName}
+                  {addNewPizza?.name}
                 </Box>
 
                 <Typography
@@ -270,7 +269,7 @@ const Pizza = ({ pizza }) => {
                     color: 'rgb(3,37,77)',
                   }}
                 >
-                  {`R$ ${addNewPizza?.pizzaPrice}`}
+                  {`R$ ${addNewPizza?.price}`}
                   <Button
                     sx={{
                       borderRadius: '4px',
@@ -321,7 +320,7 @@ const Pizza = ({ pizza }) => {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box sx={style}> 
+            <Box sx={style}>
               <Box
                 sx={{
                   position: 'absolute',
@@ -334,7 +333,7 @@ const Pizza = ({ pizza }) => {
                   alignItems: 'center',
                   alignContent: 'center',
                   textAlign: 'center',
-                 
+
                 }}
               >
                 <CloseIcon

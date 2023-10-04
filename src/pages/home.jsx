@@ -4,27 +4,23 @@ import { TextField, Typography, Stack, Box } from '@mui/material'
 import Pizza from '../componets/pizza'
 import Banner from '../componets/Banner'
 import { Header } from '../Header/Header'
-import { CarMobileIcon } from '../componets/CarMobileIcon'
 import { MyFooter } from '../componets/Footer'
-import { Cta } from '../componets/Cta'
 import { useEffect } from 'react'
-import { api_users } from '../api/back'
-import { PaymentIcon } from '../paidIngredients/PaymentIcon'
+import { api_pizzas } from '../api/back'
 import { PaidIngredients } from '../paidIngredients'
 
 export const MyHome = () => {
-  const [messages, setMessages] = useState([])
+  const [pizzas, setPizzas] = useState([])
   useEffect(() => {
-    const getMessages = async () => {
+    const getPizzas = async () => {
       try {
-        const response = await api_users.user.get()
-        setMessages(response)
+        const response = await api_pizzas.
+        setPizzas(response)
       } catch (err) {
         console.err(err)
       }
     }
-    getMessages()
-    console.log(messages)
+    getPizzas()
   }, [])
   return (
     <>
@@ -50,7 +46,7 @@ export const MyHome = () => {
       >
         <Header />
         <Banner />
-        <Pizza />
+        <Pizza pizzas={pizzas}/>
       
         <PaidIngredients/>
         <MyFooter />

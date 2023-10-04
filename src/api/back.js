@@ -1,10 +1,10 @@
 import { collection, doc, getDoc, getDocs } from 'firebase/firestore'
 import { db } from '../../firebase.config'
-export const api_users = {
-  user: {
-    get: async (id) => {
+export const api_pizzas = {
+  pizzas: {
+    pizza: async (id) => {
       if (id) {
-        const docSnap = await getDoc(doc(db, 'ChatPizzaria', id))
+        const docSnap = await getDoc(doc(db, 'pizzas', id))
         if (docSnap.exists()) {
           return docSnap.data()
         } else {
@@ -12,34 +12,31 @@ export const api_users = {
         }
         return {}
       }
-      const querySnapshot = await getDocs(collection(db, 'ChatPizzaria'))
+      const querySnapshot = await getDocs(collection(db, 'pizzas'))
+      const pizzaData = []
+      querySnapshot.forEach((doc) => {
+        pizzaData.push(doc.data())
+      })
+      return pizzaData
+    },
+  },
+  minha_sacola: {
+    get: async (id) => {
+      if (id) {
+        const docSnap = await getDoc(doc(db, 'minha_sacola', id))
+        if (docSnap.exists()) {
+          return docSnap.data()
+        } else {
+          console.log('No such document!')
+        }
+        return {}
+      }
+      const querySnapshot = await getDocs(collection(db, 'minha_sacola'))
       const usersData = []
       querySnapshot.forEach((doc) => {
         usersData.push(doc.data())
       })
       return usersData
-      console.log(usersData)
     },
   },
 }
-
-// const sendMessage = async (e) => {
-//     e.preventDefault();
-
-//     await db.collection('ChatPizzaria').add({
-//       userText: message,
-//       userImage: 'img',
-//       user: 'user',
-//       timestamp: new Date(),
-//     });
-
-//     // Resposta automática (substitua pela lógica desejada)
-//     await db.collection('ChatPizzaria').add({
-//         userImage: 'img',
-//         userText: 'Obrigado por entrar em contato conosco. Em breve responderemos sua mensagem!',
-//       user: 'bot',
-//       timestamp: new Date(),
-//     });
-
-//     setMessage('');
-//   };
